@@ -17,7 +17,8 @@ class KnightPathFinder
     def initialize(starting_position)
         @root_node = PolyTreeNode.new(starting_position)
         @considered_positions = Set[starting_position]
-        @move_tree = self.build_move_tree
+        
+        self.build_move_tree
     end
 
     def self.valid_moves(pos)
@@ -46,10 +47,8 @@ class KnightPathFinder
     end
 
     def build_move_tree
-        move_tree = self.root_node
-
         # bfs algorithm to build the move tree
-        queue = [move_tree]
+        queue = [self.root_node]
 
         until queue.empty?
             head = queue.shift
@@ -62,7 +61,23 @@ class KnightPathFinder
                 queue << new_child
             end
         end
+    end
 
-        move_tree
+    def find_path(end_pos)
+        path_end = self.root_node.dfs(end_pos)
+
+        self.trace_path_back(path_end)
+    end
+
+    def trace_path_back(node)
+        path = [node.value]
+        current_node = node.parent
+
+        while current_node
+            path.unshift(current_node.value)
+            current_node = current_node.parent
+        end
+
+        path
     end
 end
