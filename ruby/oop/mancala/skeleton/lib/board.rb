@@ -99,5 +99,15 @@ class Board
   end
 
   def winner
+    player1_score = self.cups[6].length
+    player2_score = self.cups[13].length
+
+    if player1_score > player2_score
+      return @name1
+    elsif player2_score > player1_score
+      return @name2
+    else
+      return :draw
+    end
   end
 end
