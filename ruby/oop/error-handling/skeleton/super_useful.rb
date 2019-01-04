@@ -41,6 +41,10 @@ class BestFriend
     @name = name
     @yrs_known = yrs_known
     @fav_pastime = fav_pastime
+
+    raise ArgumentError.new "Name cannot be left blank!" if @name.empty?
+    raise ArgumentError.new "You must be friends for at least 5 years!" if @yrs_known < 5
+    raise ArgumentError.new "Pastime cannot be left blank!" if @fav_pastime.empty?
   end
 
   def talk_about_friendship
