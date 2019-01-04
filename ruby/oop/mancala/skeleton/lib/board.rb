@@ -84,6 +84,18 @@ class Board
   end
 
   def one_side_empty?
+    first_half = @cups[0..5]
+    second_half = @cups[7..12]
+    
+    first_half_empty = first_half.all? do |cup|
+      cup.empty?
+    end
+
+    second_half_empty = second_half.all? do |cup|
+      cup.empty?
+    end
+
+    first_half_empty || second_half_empty
   end
 
   def winner
