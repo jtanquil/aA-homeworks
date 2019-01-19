@@ -33,6 +33,7 @@ MOVES = {
 class Cursor
 
   attr_reader :cursor_pos, :board
+  attr_writer :cursor_pos
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
@@ -88,5 +89,12 @@ class Cursor
   end
 
   def update_pos(diff)
+    new_pos = []
+
+    diff.each_with_index do |ele, idx|
+      new_pos[idx] = self.cursor_pos[idx] + ele
+    end
+
+    self.cursor_pos = new_pos if self.board.valid_pos(new_pos)
   end
 end

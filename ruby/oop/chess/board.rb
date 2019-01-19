@@ -11,8 +11,10 @@ class Board
     def create_board
         board = Array.new(8) { Array.new }
         board.each_with_index do |row, idx|
-            if idx < 2 || idx > 5
-                8.times { row << Piece.new }
+            if idx < 2
+                8.times { row << Piece.new(:b) }
+            elsif idx > 5
+                8.times { row << Piece.new(:w) }
             else
                 8.times { row << nil }
             end
@@ -39,6 +41,6 @@ class Board
     end
 
     def valid_pos(pos)
-        true
+        pos.all? { |ele| ele.between?(0, 7) }
     end
 end
