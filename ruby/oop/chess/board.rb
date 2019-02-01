@@ -10,11 +10,11 @@ class Board
 
     def create_board
         board = Array.new(8) { Array.new }
-        board.each_with_index do |row, idx|
-            if idx < 2
-                8.times { row << Piece.new(:b) }
-            elsif idx > 5
-                8.times { row << Piece.new(:w) }
+        board.each_with_index do |row, idx1|
+            if idx1 < 2
+                (0..8).to_a.each_index { |idx2| row << Piece.new(:b, self, [idx1, idx2]) }
+            elsif idx1 > 5
+                (0..8).to_a.each_index { |idx2| row << Piece.new(:w, self, [idx1, idx2]) }
             else
                 8.times { row << nil }
             end
